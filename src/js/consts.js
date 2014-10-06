@@ -9,8 +9,8 @@ var PREFERENCES = {}; //set when logging in
 var MAX_INT = Math.pow(2, 63) - 1;
 var UNIT = 100000000; //# satoshis in whole
 var MIN_FEE = 2 * UNIT; // in satoshis (== .0002 BTC)
-var REGULAR_DUST_SIZE = UNIT;
-var MULTISIG_DUST_SIZE = UNIT * 2;
+var REGULAR_DUST_SIZE = 6000 / UNIT;
+var MULTISIG_DUST_SIZE = REGULAR_DUST_SIZE * 2;
 var MIN_PRIME_BALANCE = 50000; //in satoshis ... == .0005
 var ASSET_CREATION_FEE_XCP = 0.5; //in normalized XCP
 var MAX_ASSET_DESC_LENGTH = 41; //42, minus a null term character?
@@ -19,13 +19,13 @@ var FEE_FRACTION_PROVIDED_DEFAULT_PCT = 1;   //1.00% of total order
 var FEE_FRACTION_DEFAULT_FILTER = .95;
 var BTC_ORDER_MIN_AMOUNT = 0.01;
 
-var DEFAULT_NUM_ADDRESSES = 1; //default number of addresses to generate. Go with 1 for now to be more newbie friendly
+var DEFAULT_NUM_ADDRESSES = 3; //default number of addresses to generate. Go with 1 for now to be more newbie friendly
 var MAX_ADDRESSES = 20; //totall arbitrary :)
 
 //Order expiration
-var ORDER_DEFAULT_EXPIRATION = 1000; //num blocks until expiration (at ~9 min per block this is ~6.75 days)
-var ORDER_BTCSELL_DEFAULT_EXPIRATION = 2000; //num blocks until expiration for selling BTC order
-var ORDER_MAX_EXPIRATION = 3000; //max expiration for order
+var ORDER_DEFAULT_EXPIRATION = 14400; //num blocks until expiration (at ~9 min per block this is ~6.75 days)
+var ORDER_BTCSELL_DEFAULT_EXPIRATION = 14400; //num blocks until expiration for selling BTC order
+var ORDER_MAX_EXPIRATION = 14400; //max expiration for order
 
 var STATS_MAX_NUM_TRANSACTIONS = 100; //max # transactions to show in the table
 var VIEW_PRICES_NUM_ASSET_PAIRS = 50; //show market info for this many pairs
@@ -170,11 +170,11 @@ var BET_MATCHES_STATUS = {
   "settled: for notequal": 3
 }
 
-var LEVERAGE_UNIT = 5040;
+var LEVERAGE_UNIT = 6000;
 
-var MAINNET_UNSPENDABLE = 'DDogepartyxxxxxxxxxxxxxxxxxxw1dfzr';
-var TESTNET_UNSPENDABLE = 'ndogepartyxxxxxxxxxxxxxxxxxxwpsZCH';
-var MAINNET_DONATION = 'DLtFm7fnuVFHRWcUTsikccLnTyduWntHdF';
+var MAINNET_UNSPENDABLE = 'MPTpSGZ7REYJMAFJ1J1mN8Wq8eem7an7u4';
+var TESTNET_UNSPENDABLE = 'MPTpSGZ7REYJMAFJ1J1mN8Wq8eem7an7u4';
+var MAINNET_DONATION = 'MPTpSGZ7REYJMAFJ1J1mN8Wq8eem7an7u4';
 var TESTNET_DONATION = 'xnV9kfQFxzPvSYoSuZVqRJduLxdhyziFKiZ';
 
 /***********
@@ -195,7 +195,7 @@ var USE_TESTNET = (   (((location.pathname == "/" || location.pathname == "/src/
                    || location.hostname.indexOf('testnet') != -1) ? true : false
                   );
 
-var BURN_START, BURN_END, BURN_MULTIPLIER = 0.001;
+var BURN_START, BURN_END, BURN_MULTIPLIER = 1;
 if (USE_TESTNET) {
   if (typeof TESTNET_BURN_START !== "undefined") {
     BURN_START = TESTNET_BURN_START;
@@ -223,7 +223,7 @@ location.hash = '';
 var ORIG_REFERER = document.referrer;
 
 //CONSTANTS THAT DEPEND ON IS_DEV / USE_TESTNET
-var BLOCKEXPLORER_URL = USE_TESTNET ? "http://test.dogepartychain.info" : "http://dogepartychain.info";
+var BLOCKEXPLORER_URL = USE_TESTNET ? "http://myriadplatform.org" : "http://myriadplatform.org";
 var GOOGLE_ANALYTICS_UAID = null; //will be set in counterwallet.js
 var ROLLBAR_ACCESS_TOKEN = null; //will be set in counterwallet.js
 
